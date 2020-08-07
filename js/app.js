@@ -1,6 +1,6 @@
 'use strict';
 
-var hoursOfOperation = ['6am', '7am'];
+var hoursOfOperation = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm'];
 
 function getRandomIntInclusive(min, max) {
   min = Math.ceil(min);
@@ -20,23 +20,22 @@ var seattleObj = {
       var hourlySales = Math.ceil(getRandomIntInclusive(this.minCust, this.maxCust));
       this.hourlySalesArray.push(hourlySales);
       this.totalDailySales += hourlySales;
-    };
-
-    render: function() {
-      this.calcHourlySalesArray();
-      //remember to change the element ID.
-      var ulEl = document.getElementById('seattle');
-      for (var i = 0; i < hoursOfOperation.length; i++) {
-        var liEl = document.createElement('li');
-        liEl.textContent = `${hoursOfOperation[i]}: ${this.hourlySalesArray[i]} cookies`;
-        ulEl.append(liEl);
-      }
-      liEl = document.createElement('li');
-      liEl.textContent = `Total: ${this.dailySalesTotal} cookies`;
+    }
+  },
+  render: function () {
+    this.calcHourlySalesArray();
+    var ulEl = document.getElementById('seattle');
+    for (var i = 0; i < hoursOfOperation.length; i++) {
+      var liEl = document.createElement('li');
+      liEl.textContent = `${hoursOfOperation[i]}: ${this.hourlySalesArray[i]} cookies`;
       ulEl.append(liEl);
     }
+    liEl = document.createElement('li');
+    liEl.textContent = `Total: ${this.totalDailySales} cookies`;
+    ulEl.append(liEl);
   }
-}
+};
+
 seattleObj.render();
 
 
