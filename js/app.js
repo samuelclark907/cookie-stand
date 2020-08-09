@@ -1,7 +1,11 @@
 'use strict';
 
 
-var hoursOfOperation = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm'];
+var hoursOfOperation = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm',];
+var totalsForEachHour = [];
+var totalOfAllLocations = 0;
+
+
 
 function getRandomIntInclusive(min, max) {
   min = Math.ceil(min);
@@ -11,7 +15,116 @@ function getRandomIntInclusive(min, max) {
 
 //Seattle object and hourly averages
 
-var seattleObj = {
+function Sales(location, minCust, maxCust, avgCust) {
+  this.location = location;
+  this.minCust = minCust;
+  this.maxCust = maxCust;
+  this.avgCust = avgCust;
+  this.hourlySalesArray = [];
+  this.totalDailySales = 0;
+}
+Sales.prototype.calcHourlySalesArray = function () {
+  for (var i = 0; i < hoursOfOperation.length; i++) {
+    var hourlySales = Math.ceil(getRandomIntInclusive(this.minCust, this.maxCust) * this.avgCust);
+    this.hourlySalesArray.push(hourlySales);
+    this.totalDailySales += hourlySales;
+  }
+};
+
+
+
+var hoursTableEl = document.getElementById('table-head');
+var hoursRowsEl = document.createElement('tr');
+var hoursHeadEl = document.createElement('th');
+hoursHeadEl.textContent = ('Hours');
+hoursRowsEl.append(hoursHeadEl);
+hoursTableEl.append(hoursRowsEl);
+
+for (var i = 0; i < hoursOfOperation.length; i++) {
+  var hoursDataEl = document.createElement('th');
+  hoursDataEl.textContent = this.hoursOfOperation[i];
+  hoursRowsEl.append(hoursDataEl);
+  hoursTableEl.append(hoursRowsEl);
+}
+
+
+Sales.prototype.render = function () {
+  this.calcHourlySalesArray();
+  var parentEl = document.getElementById('table-body');
+  var trowEl = document.createElement('tr');
+  var theadEl = document.createElement('th');
+  theadEl.textContent = this.location;
+  trowEl.append(theadEl);
+  parentEl.append(trowEl);
+
+  for (var i = 0; i < hoursOfOperation.length; i++) {
+    var tdataEl = document.createElement('td');
+    tdataEl.textContent = this.hourlySalesArray[i];
+    trowEl.append(tdataEl);
+  }
+  tdataEl = document.createElement('td');
+  tdataEl.textContent = `Total ${this.totalDailySales}`;
+  trowEl.append(tdataEl);
+  parentEl.append(trowEl);
+};
+
+
+
+
+
+
+
+var seattle = new Sales('Seattle', 23, 65, 6.3);
+var tokyo = new Sales('Tokyo', 3, 24, 1.2);
+var dubai = new Sales('Dubai', 11, 38, 3.7);
+var paris = new Sales('Paris', 20, 38, 2.3);
+var lima = new Sales('Lima', 2, 16, 4.6);
+
+
+
+seattle.render();
+tokyo.render();
+dubai.render();
+paris.render();
+lima.render();
+
+function getTotalHour() {
+  for (var i = 0; i < hoursOfOperation.length; i++) {
+    var hourTotal = 0;
+    for (var j = 0; j < totalOfAllLocations.length; j++) {
+      hourTotal += totalOfAllLocations[j].hourlySalesArray[i];
+    }
+    totalOfAllLocations += hourTotal;
+    totalsForEachHour[i] = hourTotal;
+  }
+}
+
+getTotalHour();
+
+var totalAll = document.getElementById('table-foot');
+var totalRows = document.createElement('tr');
+var totalData = document.createElement('th');
+totalData.textContent = ('Totals');
+totalRows.append(totalData);
+totalAll.append(totalRows);
+for (i = 0; i < hoursOfOperation.length; i++) {
+  var totalHourlyData = document.createElement('td');
+  totalHourlyData.textContent = totalsForEachHour[i];
+  totalRows.append(totalHourlyData);
+}
+var grandTotal = document.createElement('td');
+grandTotal.textContent = totalOfAllLocations;
+totalRows.append(`The grand total is ${totalOfAllLocations}`);
+
+
+
+
+
+
+
+
+
+/*var seattleObj = {
   minCust: 23,
   maxCust: 65,
   avgCust: 6.3,
@@ -162,5 +275,4 @@ var limaObj = {
   }
 };
 
-limaObj.render();
-
+limaObj.render();*/
