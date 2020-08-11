@@ -2,6 +2,7 @@
 
 
 var hoursOfOperation = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm',];
+
 var totalsForEachHour = [];
 var totalOfAllLocations = 0;
 
@@ -79,6 +80,7 @@ var tokyo = new Sales('Tokyo', 3, 24, 1.2);
 var dubai = new Sales('Dubai', 11, 38, 3.7);
 var paris = new Sales('Paris', 20, 38, 2.3);
 var lima = new Sales('Lima', 2, 16, 4.6);
+var allLocations = [seattle, tokyo, dubai, paris, lima];
 
 
 
@@ -91,8 +93,8 @@ lima.render();
 function getTotalHour() {
   for (var i = 0; i < hoursOfOperation.length; i++) {
     var hourTotal = 0;
-    for (var j = 0; j < totalOfAllLocations.length; j++) {
-      hourTotal += totalOfAllLocations[j].hourlySalesArray[i];
+    for (var j = 0; j < allLocations.length; j++) {
+      hourTotal += allLocations[j].hourlySalesArray[i];
     }
     totalOfAllLocations += hourTotal;
     totalsForEachHour[i] = hourTotal;
