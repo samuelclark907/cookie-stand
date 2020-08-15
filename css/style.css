@@ -122,3 +122,19 @@ footer section {
   margin-left: 30px;
   margin-bottom: 50px;
 }
+
+table, th, td {
+  border: 1px solid black;
+  margin-top: 50px;
+  text-align: center;
+  margin-left: 50px;
+}
+
+#new-city {
+  display: inline;
+}
+
+legend {
+  text-align: center;
+  margin-bottom: 30px;
+}

@@ -2,13 +2,19 @@
 <html>
 
 <head>
+  <link rel="stylesheet" href= "css/reset.css">
   <link rel="stylesheet" href="css/style.css">
+  
 </head>
 
 <body>
   <header>
-    
-    <h1>Salmon Cookies</h1>
+    <nav>
+      <h2>Salmon Cookies Sales Sheet</h2>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+      </ul>
+    </nav>
   </header>
   <!--<ul id="seattle"></ul>
   <h1>Tokyo Daily Average Cookies</h1>
@@ -19,6 +25,26 @@
   <ul id="paris"></ul>
   <h1>Lima Daily Sales Cookies</h1>
   <ul id="lima"></ul> -->
+
+  <form id="newcity">
+    <fieldset>
+      <legend>New City</legend>
+      <label for="cityname">New city name</label>
+      <input type="text" placeholder="cityname" name="cityname">
+
+      <label for="mincust">Minimum Daily Customers</label>
+      <input type="number" placeholder="####" name="mincust" min="1">
+
+      <label for="maxcust">Maximum Daily Customers</label>
+      <input type="number" placeholder="####" name="maxcust" min="1">
+
+      <label for="avgcust">Average Sale per Customer</label>
+      <input type="float" placeholder="###" name="avgcust" min="1">
+      <button type="submit">submit</button>
+      
+
+    </fieldset>
+  </form>
 
   <div>
     <table>
